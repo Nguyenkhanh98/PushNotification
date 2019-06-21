@@ -1,4 +1,4 @@
-import {https} from "https";
+var https =require ("https");
 
 const host = 'graph.microsoft.com';
 

@@ -1,6 +1,8 @@
-import { subscriptionConfiguration } from '../constants';
-import { postData, deleteData } from '../helpers/requestHelper';
 var express = require('express');
+var  subscriptionConfiguration =require('../contants');
+var { postData, deleteData } = require('../helpers/request');
+var SaveDatafrom  = require('../modals/Sup');
+
 var router = express.Router();
 var authHelper = require('../helpers/auth');
 
@@ -8,7 +10,6 @@ var authHelper = require('../helpers/auth');
 router.get('/',async function(req, res, next) {
   // Get auth code
   const code = req.query.code;
-  const
   // If code is present, use it
   if (code) {
     
@@ -17,14 +18,17 @@ router.get('/',async function(req, res, next) {
        const accessToken = await authHelper.getAccessToken(req.cookies,res);
        subscriptionConfiguration.expirationDateTime = new Date(Date.now() + 86400000).toISOString();
        
-       var sup = await postData('/beta/subscriptions',token,JSON.stringify(subscriptionConfiguration);
+       var sup = await postData('/beta/subscriptions',token,JSON.stringify(subscriptionConfiguration));
        if(sup)
        {
           sup.userId = token.userId;
           sup.accessToken = accessToken;
        }
-       
-       res.redirect('/');
+       SaveData(sup);
+       res.redirect(
+        '/index.hbs?subscriptionId=' + subscriptionData.id +
+        '&userId=' + subscriptionData.userId
+      );
     }catch(error){
         res.render('error',{});
       }
