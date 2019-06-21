@@ -10,7 +10,7 @@ var indexRouter = require('./routes/index');
 var authorize = require('./routes/authorize');
 var mail = require('./routes/mail');
 var usersRouter = require('./routes/users');
-
+var listen = require('./routes/listen');
 var app = express();
 var db = require('./modals/db');
 
@@ -29,10 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', indexRouter);
 app.use('/authorize', authorize);
-app.use('/mail',mail);
-
-app.use('/users', usersRouter);
-
+app.use('/listen',listen);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

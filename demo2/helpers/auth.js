@@ -54,14 +54,14 @@ async function getAccessToken(cookies, res){
     const refresh_token =cookies.graph_refresh_token;
     if(refresh_token){
         const newToken = await oauth2.accessToken.create({refresh_token:refresh_token}).refresh();
-        saveValueToCookie(newToken,res);
+         saveValueToCookie(newToken,res);
         return newToken.graph_access_token;
     }
 return null;
   }
 
 
-function saveValueToCookie(token,res){
+ function saveValueToCookie(token,res){
     const user = jwt.decode(token.token.id_token);
     res.cookie('graph_access_token', token.token.access_token, {maxAge: 3600000, httpOnly: true});
     res.cookie('graph_user_name', user.name, {maxAge: 3600000, httpOnly: true});
