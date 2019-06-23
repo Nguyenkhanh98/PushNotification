@@ -1,6 +1,6 @@
 var express = require('express');
 var  subscriptionConfiguration =require('../contants').subscriptionConfiguration;
-var { postData, deleteData } = require('../helpers/request');
+var postData = require('../helpers/request').postData;
 var SaveDatafrom  = require('../modals/Sup');
 
 var router = express.Router();
@@ -19,10 +19,10 @@ router.get('/',async function(req, res, next) {
        const token = await authHelper.getTokenFromCode(code, res);
        subscriptionConfiguration.expirationDateTime = new Date(Date.now() + 86400000).toISOString();
        
-    await postData('/beta/subscriptions',token,JSON.stringify(subscriptionConfiguration),(RequesError , SubData)=>{
+     postData('/beta/subscriptions',token,JSON.stringify(subscriptionConfiguration),(RequesError , SubData)=>{
 
 if(SubData){
-  
+  console.log('xôxoxoxoxoxoxo ');
   SubData.userId = token.userId;
   SubData.accessToken = accessToken;
 }else if(RequesError){

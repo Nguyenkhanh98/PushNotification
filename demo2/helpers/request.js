@@ -2,7 +2,7 @@ var https =require ("https");
 
 const host = 'graph.microsoft.com';
 
-async function postData(path,token,data,callback){
+ function postData(path,token,data,callback){
     const options
      = {
         host: host,
@@ -16,11 +16,11 @@ async function postData(path,token,data,callback){
     };
     console.log(options);
     const req = https.request(options,res => {
+      console.log(res.statusCode);
         let subscriptionData ='';
         res.on('data', chunk =>{subscriptionData += chunk;
-        
+          console.log(subscriptionData);});
         res.on('end',()=>{
-            console.log(subscriptionData)});
         
         if(res.statusCode === 201) callback(null,JSON.parse(subscriptionData));
         else callback(JSON.parse(subscriptionData),null);
