@@ -19,7 +19,7 @@
     "morgan": "~1.9.1",
     "nodemon": "^1.19.1",
     "pg": "^7.11.0",
-    "sequelize": "^5.8.10",
+    "sequelize": "^5.15.1",
     "simple-oauth2": "^2.2.1"
   }
 }
